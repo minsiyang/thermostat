@@ -1,44 +1,42 @@
 $(document).ready(function() {
+  var thermostat = new Thermostat();
+  updateTemperature();
 
-    var thermostat = new Thermostat();
-
-    $('#temperature').text(thermostat.temperature);
-
-    $('#up_temp').on('click', function() {
-      thermostat.up();
-      $('#temperature').text(thermostat.temperature);
+  $('#up_temp').on('click', function() {
+    thermostat.up();
+    updateTemperature();
     })
 
     $('#down_temp').on('click', function() {
       thermostat.down();
-      $('#temperature').text(thermostat.temperature);
+      updateTemperature();
     })
 
     $('#reset_temp').on('click', function() {
       thermostat.resetTemperature();
-      $('#temperature').text(thermostat.temperature);
+      updateTemperature();
     })
 
     $('#ps_mode_on').on('click', function() {
       thermostat.switchPowerSavingModeOn();
       $('#power_saving_mode').text("ON");
-      $('#temperature').text(thermostat.temperature);
+      updateTemperature();
     })
 
     $('#ps_mode_off').on('click', function() {
       thermostat.switchPowerSavingModeOff();
       $('#power_saving_mode').text("OFF");
-      $('#temperature').text(thermostat.temperature);
+      updateTemperature();
     })
 
-    $('#temperature').text(thermostat.temperature); 
-      if (thermostat.energyUsage() === 'low-usage'){
-      $('#tempreture').css( 'color', 'green' )
+    function updateTemperature() {
+    $('#temperature').text(thermostat.temperature);
+    if (thermostat.energyUsage() === 'low-usage'){
+      $('#temperature').css( 'color', 'green' )
     } else if (thermostat.energyUsage() === 'medium-usage'){
-      $('#tempreture').css( 'color', 'black' )
+      $('#temperature').css( 'color', 'black' )
     } else {
-      $('#tempreture').css( 'color', 'red' )
+      $('#temperature').css( 'color', 'red' )
     }
- 
-
+  }
 })
